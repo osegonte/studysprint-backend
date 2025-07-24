@@ -35,9 +35,9 @@ class Session(Base):
     session_type = Column(String(20), default=SessionType.STUDY.value)
     status = Column(String(20), default=SessionStatus.ACTIVE.value)
     
-    # Foreign keys (to be implemented when other modules are ready)
-    topic_id = Column(Integer, nullable=True)  # ForeignKey("topics.id")
-    pdf_id = Column(Integer, nullable=True)    # ForeignKey("pdfs.id")
+    # Foreign keys
+    topic_id = Column(Integer, ForeignKey("topics.id"), nullable=True)
+    pdf_id = Column(Integer, ForeignKey("pdfs.id"), nullable=True)
     
     # Session timing
     start_time = Column(DateTime, default=datetime.utcnow)
@@ -70,6 +70,9 @@ class Session(Base):
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relationships
+    pdf = relationship("PDF", back_populates="sessions")
     
     def __repr__(self):
         return f"<Session(id={self.id}, type={self.session_type}, status={self.status})>"

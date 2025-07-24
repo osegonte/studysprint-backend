@@ -36,9 +36,8 @@ class Topic(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     last_studied_at = Column(DateTime, nullable=True)
     
-    # Relationships (will be added as other modules are implemented)
-    # pdfs = relationship("PDF", back_populates="topic")
-    # sessions = relationship("Session", back_populates="topic")
+    # Relationships
+    pdfs = relationship("PDF", back_populates="topic")
     
     def __repr__(self):
         return f"<Topic(id={self.id}, name='{self.name}', progress={self.completion_percentage}%)>"

@@ -1,6 +1,6 @@
 """
 StudySprint 4.0 - Main FastAPI Application
-Backend-first development approach - Stage 1 Complete
+Backend-first development approach - Stage 2 Complete
 """
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -35,13 +35,15 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     """Application lifespan events"""
     # Startup
-    logger.info("🚀 Starting StudySprint 4.0 Backend - Stage 1")
+    logger.info("🚀 Starting StudySprint 4.0 Backend - Stage 2")
     try:
         await init_database()
         logger.info("✅ Database initialized successfully")
         logger.info("📊 Topics module: Ready")
         logger.info("🔄 Sessions module: Ready with WebSocket support")
-        logger.info("📄 PDFs module: Placeholder ready")
+        logger.info("📄 PDFs module: Ready with upload & processing")
+        logger.info("🔍 PDF Search: Operational")
+        logger.info("🎨 PDF Highlights: Supported")
     except Exception as e:
         logger.error(f"❌ Failed to initialize application: {e}")
         raise
@@ -55,8 +57,8 @@ async def lifespan(app: FastAPI):
 # Create FastAPI application
 app = FastAPI(
     title="StudySprint 4.0 API",
-    description="Comprehensive learning tool backend - Stage 1 Complete",
-    version="4.0.0-stage1",
+    description="Comprehensive learning tool backend - Stage 2 Complete",
+    version="4.0.0-stage2",
     lifespan=lifespan,
     docs_url="/api/docs",
     redoc_url="/api/redoc"
@@ -84,12 +86,15 @@ async def root():
     """Root endpoint with API status"""
     return {
         "message": "StudySprint 4.0 Backend API",
-        "version": "4.0.0-stage1",
-        "stage": "Core Foundation APIs - Complete",
+        "version": "4.0.0-stage2",
+        "stage": "PDFs Module - Complete",
         "features": {
             "topics": "✅ Full CRUD with progress tracking",
             "sessions": "✅ Real-time timer with WebSocket support",
-            "pdfs": "🔄 Placeholder (Stage 1 - Day 2)",
+            "pdfs": "✅ Upload, processing, exercise attachment",
+            "search": "✅ Content-based PDF search",
+            "highlights": "✅ PDF annotation system",
+            "thumbnails": "✅ Automatic thumbnail generation",
             "websocket": "✅ Real-time timer updates"
         },
         "endpoints": {
@@ -105,13 +110,14 @@ async def health_check():
     """Comprehensive health check"""
     return {
         "status": "healthy",
-        "stage": "1 - Core Foundation APIs",
+        "stage": "2 - PDFs Module Complete",
         "modules": {
             "topics": "✅ Operational",
             "sessions": "✅ Operational with WebSocket",
-            "pdfs": "🔄 Placeholder",
-            "database": "✅ Connected",
-            "websocket": "✅ Available"
+            "pdfs": "✅ Upload, processing & search operational",
+            "database": "✅ Connected with relationships",
+            "websocket": "✅ Available",
+            "file_storage": "✅ Configured"
         },
         "version": settings.VERSION,
         "debug": settings.DEBUG
@@ -123,32 +129,42 @@ async def api_status():
     """Detailed API status for development"""
     return {
         "stage_progress": {
-            "stage_1": {
-                "name": "Core Foundation APIs",
+            "stage_2": {
+                "name": "PDFs Module Implementation",
                 "status": "✅ Complete",
                 "components": {
-                    "topics": "✅ Full CRUD + Progress tracking",
-                    "sessions": "✅ Real-time tracking + WebSocket",
-                    "database": "✅ SQLAlchemy models + relationships",
-                    "websocket": "✅ Real-time timer updates"
+                    "pdf_upload": "✅ Multi-part upload with validation",
+                    "metadata_extraction": "✅ PyPDF2 page count & text",
+                    "exercise_attachment": "✅ Parent-child PDF relationships",
+                    "file_serving": "✅ Streaming with caching headers",
+                    "thumbnail_generation": "✅ Automatic thumbnail creation",
+                    "search_system": "✅ Content & filename search",
+                    "highlight_system": "✅ Coordinate-based annotations",
+                    "database_relationships": "✅ Cross-module foreign keys"
                 }
             },
             "next_stage": {
-                "name": "PDFs Module Implementation",
-                "scheduled": "Day 2",
+                "name": "Enhanced Sessions Analytics",
+                "scheduled": "Week 2",
                 "features": [
-                    "PDF upload with validation",
-                    "Exercise PDF attachment",
-                    "Metadata extraction",
-                    "File serving and thumbnails"
+                    "Advanced session analytics",
+                    "Multi-level time estimation",
+                    "Reading speed analysis",
+                    "Performance optimization"
                 ]
             }
         },
         "api_endpoints": {
             "topics": 6,
             "sessions": 8,
+            "pdfs": 12,
             "websocket": 1,
-            "pdfs": "0 (placeholder)"
+            "total": 27
+        },
+        "storage": {
+            "upload_directory": settings.UPLOAD_DIR,
+            "thumbnail_directory": settings.THUMBNAIL_DIR,
+            "max_file_size_mb": settings.MAX_FILE_SIZE / (1024 * 1024)
         }
     }
 
