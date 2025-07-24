@@ -37,15 +37,16 @@ ENV/
 *.db
 *.sqlite
 *.sqlite3
-data/
+data/studysprint.db
 
 # Logs
-logs/
-*.log
+logs/*.log
 
-# Uploads
-static/uploads/
-static/thumbnails/
+# Uploads (keep structure, ignore content)
+static/uploads/*
+!static/uploads/.gitkeep
+static/thumbnails/*
+!static/thumbnails/.gitkeep
 
 # Environment
 .env
@@ -65,3 +66,14 @@ htmlcov/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# Development utilities
+test_*.py
+fix_*.py
+debug_*.py

@@ -1,9 +1,18 @@
-"""PDF API routes - to be implemented in Stage 1"""
+"""PDF API routes - Basic placeholder for Stage 1"""
 from fastapi import APIRouter
 
 router = APIRouter()
 
-# TODO: Implement PDF endpoints
+@router.get("/")
+async def list_pdfs():
+    """Placeholder endpoint for PDF listing"""
+    return {
+        "message": "PDFs module placeholder - Stage 1",
+        "status": "coming_soon",
+        "scheduled_implementation": "Day 2 of Stage 1"
+    }
+
+# TODO: Implement PDF endpoints in Day 2
 # - POST /api/pdfs/upload
 # - POST /api/pdfs/{study_pdf_id}/attach-exercise
 # - GET /api/pdfs/
