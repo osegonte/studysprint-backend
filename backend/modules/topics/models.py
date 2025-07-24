@@ -39,6 +39,12 @@ class Topic(Base):
     # Relationships
     pdfs = relationship("PDF", back_populates="topic")
     
+    estimations = relationship(
+        "EstimationData", 
+        primaryjoin="and_(Topic.id == foreign(EstimationData.content_id), EstimationData.content_type == 'topic')",
+        viewonly=True
+    )
+    
     def __repr__(self):
         return f"<Topic(id={self.id}, name='{self.name}', progress={self.completion_percentage}%)>"
     

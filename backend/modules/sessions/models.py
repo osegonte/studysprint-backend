@@ -73,7 +73,8 @@ class Session(Base):
     
     # Relationships
     pdf = relationship("PDF", back_populates="sessions")
-    
+    estimation_records = relationship("EstimationHistory", back_populates="session")
+    analytics = relationship("SessionAnalytics", back_populates="session", uselist=False)
     def __repr__(self):
         return f"<Session(id={self.id}, type={self.session_type}, status={self.status})>"
     
